@@ -1,0 +1,51 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+ROOT="$(pwd)"
+pushd . &> /dev/null;
+cd $SCRIPT_DIR
+
+if [ "$1" = "createtest" ]; then
+	if [ "$#" = "2" ]; then
+		#CLEAN = 'clean:\n	rm *.o';
+		TARGET_NAME="$2";
+		TARGET_CPP="$ROOT/$TARGET_NAME.cpp";
+		TARGET_HPP="$ROOT/$TARGET_NAME.hpp";
+		TEST_NAME="test_$2.cpp"
+		if [[ -e "$TARGET_CPP" && -e "$TARGET_HPP" ]]; then
+			mkdir $TARGET_NAME;
+			cp .template/* $TARGET_NAME/;
+			cd $TARGET_NAME;
+			mv *.cpp $TEST_NAME;
+			sed -i "s/TARGETCAP/${TARGET_NAME^^}/g" makefile $TEST_NAME;
+			sed -i "s/TARGET/$TARGET_NAME/g" makefile $TEST_NAME;
+			grep -o "#include \"\(.*\)\"" $TARGET_HPP | grep -o "\".*\"" | grep -o "[[:alpha:]]*\.[[:alpha:]]*" | while read -r dep ; do
+				DEP_OUT="${dep//hpp/o}";
+				DEP_CPP="${dep//hpp/cpp}";
+				sed -i "s/DEPENDENCIES\:/DEPENDENCIES\:\n#include \"..\/..\/$dep\"/g" $TEST_NAME;
+				sed -i "s/OBJECTS=\(.*\)/OBJECTS=\1 $DEP_OUT/g" makefile;
+				sed -i "s/clean\:/# $DEP_OUT\n$DEP_OUT: ..\/..\/$DEP_CPP\n	\$(CC) \$(CPPFLAGS) -c ..\/..\/$DEP_CPP\n\nclean:/g" makefile;
+			done 
+		fi
+	fi
+else
+	if [ "$#" = "0" ]; then
+		find . -maxdepth 1 -type d \( ! -name . \) | while read dir; do
+			pushd . &> /dev/null 
+			cd "$dir/"
+			echo "building test . . .";
+			make &> /dev/null && ./test;
+			popd &> /dev/null 
+		done
+	else
+		for var in "$@"
+		do
+			pushd . &> /dev/null 
+			cd "$var/"
+			make && ./test;
+			popd &> /dev/null 
+		done
+	fi
+fi
+
+popd &> /dev/null;

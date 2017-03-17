@@ -1,0 +1,84 @@
+aphid
+├── bin
+│   └── aphid
+├── filestructure.txt
+├── inc
+│   ├── basicbuffer.hpp
+│   ├── cursor.hpp
+│   ├── glad.h
+│   ├── glyph.h
+│   ├── khrplatform.h
+│   ├── line.hpp
+│   ├── mark.hpp
+│   ├── markregister.hpp
+│   └── message.hpp
+├── lib
+│   ├── cursor.png
+│   ├── diagram.dia
+│   ├── diagram.png
+│   ├── line.png
+│   ├── mark.png
+│   ├── TEST.txt
+│   ├── textbuffer.png
+│   ├── warandpeace_long_test.txt
+│   └── warandpeace_short_test.txt
+├── makefile
+├── obj
+│   ├── basicbuffer.o
+│   ├── cursor.o
+│   ├── line.o
+│   ├── main.o
+│   ├── mark.o
+│   ├── markregister.o
+│   └── message.o
+├── README
+├── src
+│   ├── basicbuffer.cpp
+│   ├── cursor.cpp
+│   ├── glad.c
+│   ├── line.cpp
+│   ├── main.cpp
+│   ├── mark.cpp
+│   ├── markregister.cpp
+│   └── message.cpp
+└── test
+    ├── basicbuffer
+    │   ├── basicbuffer.o
+    │   ├── line.o
+    │   ├── makefile
+    │   ├── mark.o
+    │   ├── markregister.o
+    │   ├── message.o
+    │   ├── test
+    │   ├── test_basicbuffer.cpp
+    │   └── test_basicbuffer.o
+    ├── line
+    │   ├── line.o
+    │   ├── makefile
+    │   ├── mark.o
+    │   ├── markregister.o
+    │   ├── message.o
+    │   ├── test
+    │   ├── test_line.cpp
+    │   └── test_line.o
+    ├── mark
+    │   ├── line.o
+    │   ├── makefile
+    │   ├── mark.o
+    │   ├── markregister.o
+    │   ├── message.o
+    │   ├── test
+    │   ├── test_mark.cpp
+    │   └── test_mark.o
+    ├── markregister
+    │   ├── line.o
+    │   ├── makefile
+    │   ├── mark.o
+    │   ├── markregister.o
+    │   ├── message.o
+    │   ├── test
+    │   ├── test_markregister.cpp
+    │   └── test_markregister.o
+    └── testmgr
+
+10 directories, 71 files
