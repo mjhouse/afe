@@ -1,8 +1,6 @@
-AFE
+# AFE
 
-This was an attempt at making an editor from scratch, and it was never
-finished. Most of the backend stuff is done (holding, modifying text)
-etc, but there isn't any gui.
+This is the back end for a text editor that would have included some features that I haven't seen natively included in other C++/GTK text editors
 
 Directories:
     lib:
